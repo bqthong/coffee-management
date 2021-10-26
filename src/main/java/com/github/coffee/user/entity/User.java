@@ -1,21 +1,23 @@
 package com.github.coffee.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import com.github.coffee.user.dto.UserDto;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "user")
-@Data()
+@Getter
+@Setter
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "username", nullable = false)
-    @NotBlank(message = "username is mandatory")
     private String username;
 
     @Column(name = "first_name")
@@ -27,6 +29,9 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "phone")
+    private String phone;
+
     @Column(name = "password")
     @JsonIgnore
     private String password;
@@ -36,4 +41,13 @@ public class User {
 
     @Column(name = "role")
     private String role;
+
+    public void mapFromDto(UserDto userDto) {
+        this.username = userDto.getUsername();
+        this.firstName = userDto.getFirstName();
+        this.lastName = userDto.getLastName();
+        this.email = userDto.getEmail();
+        this.active = userDto.getActive();
+        this.role = userDto.getRole();
+    }
 }
