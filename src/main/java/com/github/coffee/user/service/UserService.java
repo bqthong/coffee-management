@@ -20,21 +20,11 @@ public class UserService {
     }
 
     public User findById(Long id) {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
-            return user.get();
-        } else {
-            throw new NotFoundException(String.format("User %s not found", id));
-        }
+        return userRepository.findById(id).orElseThrow(() -> new NotFoundException(String.format("User %s not found", id)));
     }
 
     public User findByUsername(String username) {
-        Optional<User> user = userRepository.findByUsername(username);
-        if (user.isPresent()) {
-            return user.get();
-        } else {
-            throw new NotFoundException(String.format("User %s not found", username));
-        }
+        return userRepository.findByUsername(username).orElseThrow(() -> new NotFoundException(String.format("User %s not found", username)));
     }
 
     public void save(Long id, UserDto updateUserDto) {
