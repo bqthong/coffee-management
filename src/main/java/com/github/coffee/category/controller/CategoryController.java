@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/categories")
+@RequestMapping("${api.prefix}/categories")
 public class CategoryController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
 
